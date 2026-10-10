@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pathwise</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{--nav:#0b1f3f;--nav2:#13294d;--amber:#f7ae3a;--bg:#eef1f6;--card:#fff;--ink:#0f1c33;--mute:#667391;--line:#e1e6ef;--good:#1f9d6b;--warn:#e08a00;--bad:#d64545;--blue:#3b6fd4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1426;--card:#122041;--ink:#e8edf8;--mute:#93a0bd;--line:#223458}}
+:root[data-theme="dark"]{--bg:#0a1426;--card:#122041;--ink:#e8edf8;--mute:#93a0bd;--line:#223458}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:Figtree,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
+button,input,select,textarea{font:inherit;color:inherit}
+aside{position:fixed;inset:0 auto 0 0;width:260px;background:var(--nav);color:#c9d3e8;padding:20px 14px;overflow-y:auto;z-index:30;transition:transform .2s;padding-top:calc(20px + env(safe-area-inset-top,0px))}
+.logo{display:flex;align-items:center;gap:10px;padding:0 10px 18px;color:#fff;font-weight:700;font-size:22px}
+.logo svg{width:30px;height:30px}.logo .x{margin-left:auto;display:none;background:none;border:0;color:#fff;font-size:26px;cursor:pointer}
+nav button{display:flex;align-items:center;gap:14px;width:100%;padding:11px 12px;margin-bottom:4px;border:0;border-radius:12px;background:none;color:#c9d3e8;cursor:pointer;text-align:left;font-weight:500}
+nav button:hover{background:var(--nav2)}nav button.on{background:var(--amber);color:#1b2438;font-weight:700}
+nav svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+header{position:sticky;top:0;z-index:10;margin-left:260px;background:var(--nav);color:#fff;display:flex;align-items:center;gap:12px;padding:12px 24px;padding-top:calc(12px + env(safe-area-inset-top,0px))}
+header h2{margin:0;font-size:18px}header .sp{flex:1}
+.ib{background:none;border:1px solid #ffffff33;color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
+#burger{display:none;border:0;font-size:24px;padding:0 6px}
+.av{width:34px;height:34px;border-radius:50%;background:var(--amber);color:#1b2438;display:grid;place-items:center;font-weight:700}
+main{margin-left:260px;padding:24px;max-width:1200px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 1px 3px #0b1f3f1a;margin-bottom:16px}.grid>.card{margin:0}
+.card h3{margin:0 0 4px;font-size:16px}.sub{color:var(--mute);font-size:13px;margin:0 0 14px}
+.big{font-size:34px;font-weight:700;line-height:1.1}.lab{font-size:12px;color:var(--mute);font-weight:600}
+.bar{height:9px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px;background:var(--blue)}
+.row{display:flex;align-items:center;gap:12px;margin:12px 0}.row .n{flex:1;min-width:0}.row b{min-width:42px;text-align:right}
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;background:var(--line)}
+.tag.g{background:#1f9d6b22;color:var(--good)}.tag.w{background:#e08a0022;color:var(--warn)}.tag.r{background:#d6454522;color:var(--bad)}
+.btn{background:var(--amber);color:#1b2438;border:0;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer}.btn.o{background:none;border:1px solid var(--line);color:var(--ink)}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);margin-bottom:10px}
+label{font-size:13px;font-weight:600;color:var(--mute);display:block;margin-bottom:4px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:14px}th{color:var(--mute);font-size:12px}
+.sc{overflow-x:auto}
+.cols{display:flex;align-items:flex-end;gap:10px;height:170px;padding-top:10px}.cols div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:12px;color:var(--mute);gap:4px}
+.cols i{width:100%;max-width:44px;background:var(--blue);border-radius:8px 8px 0 0;display:block}.cols i.a{background:var(--amber)}
+.chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px}.m{max-width:80%;padding:10px 14px;border-radius:14px;background:var(--bg)}.m.u{align-self:flex-end;background:var(--amber);color:#1b2438}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chips button{border:1px solid var(--line);background:none;border-radius:20px;padding:6px 12px;cursor:pointer}
+.sw{position:relative;width:44px;height:24px;flex:none}.sw input{opacity:0;position:absolute;inset:0;margin:0;cursor:pointer;z-index:1}.sw span{position:absolute;inset:0;background:var(--line);border-radius:24px;transition:.2s}.sw span:before{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}.sw input:checked+span{background:var(--amber)}.sw input:checked+span:before{transform:translateX(20px)}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--nav);color:#fff;padding:10px 18px;border-radius:12px;z-index:50}
+.scrim{display:none;position:fixed;inset:0;background:#0008;z-index:20}
+@media(max-width:860px){aside{transform:translateX(-100%);width:78%;max-width:300px}aside.open{transform:none}.scrim.open{display:block}header,main{margin-left:0}main{padding:16px}header{padding:12px 16px}#burger{display:block}.logo .x{display:block}}
+#login{display:none;min-height:100vh;grid-template-columns:1fr 1fr}body.out #login{display:grid}body.out aside,body.out header,body.out main,body.out .scrim{display:none}
+.lb{background:var(--nav);color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:center;gap:18px}.lb .logo{padding:0;font-size:28px}.lb p{margin:0;color:#c9d3e8;font-size:18px;max-width:380px;line-height:1.5}.lb ul{margin:0;padding:0;list-style:none;color:#c9d3e8;display:grid;gap:8px}.lb li:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:10px}
+.lf{display:flex;align-items:center;justify-content:center;padding:32px}.lf form{width:100%;max-width:380px}.lf h1{margin:0 0 4px;font-size:28px}.err{color:var(--bad);font-size:13px;min-height:18px;margin:-4px 0 8px}.lk{background:none;border:0;color:var(--blue);font-weight:600;cursor:pointer;padding:0}
+@media(max-width:860px){#login{grid-template-columns:1fr}.lb{padding:28px 24px}.lb ul{display:none}.lf{padding:24px 20px;align-items:flex-start}}
+.seg{display:flex;gap:6px;background:var(--bg);padding:4px;border-radius:12px;margin-bottom:14px}.seg button{flex:1;border:0;background:none;padding:9px;border-radius:9px;font-weight:600;cursor:pointer;color:var(--mute)}.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px #0b1f3f22}
+.mo{position:fixed;inset:0;background:#0009;display:none;place-items:center;z-index:40;padding:16px}.mo.open{display:grid}.mc{background:var(--card);border-radius:18px;padding:22px;width:100%;max-width:460px;max-height:90vh;overflow:auto}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.act{white-space:nowrap}.act .btn{padding:6px 10px;margin-right:4px}.btn.d{background:none;border:1px solid var(--bad);color:var(--bad)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+</style></head><body class="out">
+<aside id="side"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#f7ae3a" stroke-width="1.8" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/></svg>Pathwise<button class="x" id="close" aria-label="Close menu">×</button></div><nav id="nav"></nav></aside>
+<div class="scrim" id="scrim"></div>
+<header><button class="ib" id="burger" aria-label="Open menu">☰</button><h2 id="title">Dashboard</h2><span class="sp"></span><button class="ib" id="theme">Theme</button><button class="ib" id="logout">Sign out</button><div class="av" id="av">AS</div></header>
+<main id="main"></main>
+<section id="login"><div class="lb"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#f7ae3a" stroke-width="1.8" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/></svg>Pathwise</div><p>Your academic journey, clearly mapped.</p><ul><li>See your risk level before exams</li><li>Get a weekly study plan</li><li>Track placement drives and fees</li></ul></div><div class="lf"><form id="lform" novalidate><h1 id="lt">Sign in</h1><p class="sub" id="ls">Welcome back. Enter your college email to continue.</p><div class="seg" id="seg" role="group" aria-label="Sign in as"><button type="button" class="on" data-r="s">Student</button><button type="button" data-r="f">Faculty</button></div><div id="nw" style="display:none"><label for="ln">Full name</label><input id="ln" autocomplete="name"></div><label for="le">Email</label><input id="le" type="email" autocomplete="email" placeholder="aarav@college.edu"><label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" placeholder="At least 6 characters"><div class="err" id="lerr" role="alert"></div><button class="btn" style="width:100%" id="lbtn">Sign in</button><p class="sub" style="margin:16px 0 0;text-align:center"><span id="lq">New to Pathwise?</span> <button type="button" class="lk" id="lsw">Create an account</button></p><p class="sub" style="text-align:center">Demo: enter any email and a password of 6+ characters.</p></form></div></section>
+<div class='mo' id='sm' role='dialog' aria-modal='true' aria-labelledby='ft2'><form class='mc' id='sform' novalidate><h3 id='ft2' style='font-size:20px;margin-bottom:14px'>Add student</h3><div class='two'><div><label for='f_id'>Student ID</label><input id='f_id' placeholder='21CS1001'></div><div><label for='f_name'>Name</label><input id='f_name' autocomplete='off'></div></div><label for='f_email'>Email</label><input id='f_email' type='email' autocomplete='off'><div class='two'><div><label for='f_dep'>Department</label><input id='f_dep'></div><div><label for='f_sem'>Semester</label><input id='f_sem' type='number' min='1' max='12'></div></div><div class='two'><div><label for='f_att'>Attendance (%)</label><input id='f_att' type='number' min='0' max='100' step='0.1'></div><div><label for='f_cgpa'>CGPA (0 to 10)</label><input id='f_cgpa' type='number' min='0' max='10' step='0.01'></div></div><div class='err' id='ferr' role='alert'></div><div style='display:flex;gap:8px;justify-content:flex-end'><button type='button' class='btn o' id='fcancel'>Cancel</button><button class='btn' id='fsave'>Save student</button></div></form></div>
+<!-- STEP 1: Supabase official JavaScript client (loaded from a CDN, no install needed) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.js"></script>
+<script>
+/* ===== STEP 2: PASTE YOUR SUPABASE DETAILS HERE (keep the quotes) =====
+   Project URL:     Supabase dashboard > Project Settings > API
+   Publishable key: starts with sb_publishable_ (or the older "anon" key)
+   NEVER paste a "secret" or "service_role" key in this file. */
+/* The URL must be ONLY the project address: https://YOUR-PROJECT-ID.supabase.co (no /rest/v1, no extra path) */
+const SUPABASE_URL='https://rhxvszdiiuxkpuxmyjng.supabase.co';
+const SUPABASE_KEY='sb_publishable_z9r7qBCq-5BQW6sWb5FtHQ_m22PshZA';
+let db=null;
+try{if(!SUPABASE_URL.startsWith('YOUR_'))db=supabase.createClient(new URL(SUPABASE_URL).origin,SUPABASE_KEY)}catch(e){console.error('Supabase setup failed',e)}
+const I={d:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',a:'<path d="M4 4v16h16M9 16v-5M13 16V8M17 16v-3"/>',h:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2"/>',c:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4M16 3v4M9 14l2 2 4-4"/>',e:'<path d="M3 12h4l3-8 4 16 3-8h4"/>',w:'<path d="M12 3L2 20h20zM12 10v4M12 17v.5"/>',t:'<path d="M8 4h8v6a4 4 0 0 1-8 0zM8 6H4v1a3 3 0 0 0 4 3M16 6h4v1a3 3 0 0 1-4 3M12 14v4M8 21h8"/>',l:'<path d="M12 6c-2-2-5-2-9-1v14c4-1 7-1 9 1 2-2 5-2 9-1V5c-4-1-7-1-9 1zM12 6v14"/>',s:'<path d="M14 6a4 4 0 0 0 4 4l-9 9a2 2 0 0 1-3-3l9-9a4 4 0 0 0-1-1z"/>',p:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M9 7v13M15 7v13"/>',pl:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4M16 3v4M12 11v3l2 1"/>',ai:'<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/>',g:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',f:'<path d="M4 5h16v11H9l-5 4z"/>',fe:'<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 14h2"/>',u:'<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 3-6 6-6s6 2.5 6 6M18 14v4M16 16h4"/>'};
+const S=[["Dashboard","d"],["Analytics","a"],["Academic history","h"],["Attendance","c"],["Engagement","e"],["Underperformance risk","w"],["Success score","t"],["LMS","l"],["Skills","s"],["Placements","p"],["AI study planner","pl"],["AI assistant","ai"],["Goals","g"],["Feedback","f"],["Fee payment","fe"],["Profile & settings","u"]];
+const subj=[["Data Structures",86],["Operating Systems",71],["Database Systems",79],["Engineering Maths",58],["Computer Networks",64],["Software Engineering",82]];
+const att=[["Data Structures",92],["Operating Systems",81],["Database Systems",88],["Engineering Maths",67],["Computer Networks",74],["Software Engineering",90]];
+const sem=[["Sem 1",7.4],["Sem 2",7.8],["Sem 3",8.0],["Sem 4",8.3],["Sem 5",8.2]];
+let goals=[{t:"Raise Engineering Maths to 70%",p:40,d:false},{t:"Finish SQL course on LMS",p:75,d:false},{t:"Complete 2 mock interviews",p:100,d:true}];
+let fb=[{c:"Operating Systems",t:"More worked examples for scheduling would help.",s:"Sent"}];
+let fees=[["Tuition – Sem 5",42000,"Due 25 Oct",false],["Library & lab",3500,"Paid 12 Aug",true],["Exam fee",2200,"Paid 12 Aug",true]];
+let drives=[["Infosys","Systems Engineer","₹6.5 LPA",82,"Closes 14 Oct",false],["TCS Digital","Associate Developer","₹7.0 LPA",76,"Closes 18 Oct",false],["Zoho","Software Developer","₹8.0 LPA",64,"Closes 22 Oct",false]];
+let chat=[["b","Hi Aarav, I can explain topics, check your risk, or plan your week. What do you need?"]];
+let skills=[["Python",80],["SQL",70],["Data structures",75],["Communication",60],["React",45]];
+let view=0,plan=null;
+const $=s=>document.querySelector(s);
+const col=v=>v>=75?"var(--good)":v>=60?"var(--warn)":"var(--bad)";
+const bars=(a,f)=>a.map(([n,v])=>`<div class="row"><span class="n">${n}</span><div class="bar" style="flex:2"><i style="width:${v}%;background:${col(v)}"></i></div><b>${v}${f||'%'}</b></div>`).join("");
+const toast=m=>{const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),1800)};
+function ring(v,l){const r=54,c=2*Math.PI*r;return `<svg viewBox="0 0 140 140" width="160" role="img" aria-label="${l}"><circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--line)" stroke-width="13"/><circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--amber)" stroke-width="13" stroke-linecap="round" stroke-dasharray="${c*v/100} ${c}" transform="rotate(-90 70 70)"/><text x="70" y="78" text-anchor="middle" font-size="30" font-weight="700" fill="var(--ink)">${v}</text></svg>`}
+const stat=(l,v,s,t)=>`<div class="card"><div class="lab">${l}</div><div class="big">${v}</div><p class="sub" style="margin:6px 0 0">${s}</p></div>`;
+const V=[
+()=>`<div class="grid">${stat("CGPA","8.2","Up 0.2 from last semester")}${stat("Attendance","86%","Above the 75% minimum")}${stat("Success score","78","On track for placements")}${stat("Risk level","Low","1 subject needs attention")}</div><br><div class="grid g2"><div class="card"><h3>Subject performance</h3><p class="sub">Current internal marks</p>${bars(subj)}</div><div class="card"><h3>This week</h3><p class="sub">Upcoming work</p>${[["DBMS assignment 3","Tomorrow"],["Maths quiz","Thu"],["Infosys drive closes","Wed 14 Oct"],["Networks lab record","Fri"]].map(x=>`<div class="row"><span class="n">${x[0]}</span><span class="tag">${x[1]}</span></div>`).join("")}</div></div>`,
+()=>`<div class="grid g2"><div class="card"><h3>CGPA trend</h3><p class="sub">Semester GPA</p><div class="cols">${sem.map(([n,v],i)=>`<div>${v}<i class="${i==4?'a':''}" style="height:${v*10}%"></i>${n}</div>`).join("")}</div></div><div class="card"><h3>Subject vs class average</h3><p class="sub">You are above average in 4 of 6 subjects</p>${subj.map(([n,v],i)=>{const a=[74,69,72,63,66,78][i];return `<div class="row"><span class="n">${n}</span><span class="tag ${v>=a?'g':'r'}">${v>=a?'+':''}${v-a}</span></div>`}).join("")}</div></div>`,
+()=>`<div class="card sc"><h3>Academic history</h3><p class="sub">Results by semester</p><table><tr><th>Semester</th><th>Credits</th><th>GPA</th><th>Backlogs</th><th>Result</th></tr>${sem.map(([n,v],i)=>`<tr><td>${n}</td><td>${[22,24,24,26,24][i]}</td><td>${v}</td><td>0</td><td><span class="tag g">Pass</span></td></tr>`).join("")}</table></div>`,
+()=>`<div class="grid g2"><div class="card"><h3>Subject attendance</h3><p class="sub">Minimum required is 75%</p>${bars(att)}</div><div class="card"><h3>October</h3><p class="sub">Present, absent and holiday</p><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-size:12px">${"MTWTFSS".split("").map(d=>`<b class="lab">${d}</b>`).join("")}${Array.from({length:31},(_,i)=>{const d=i+1,w=(d+3)%7,x=w>4?'var(--line)':[3,9,16].includes(d)?'var(--bad)':d>9?'var(--blue)':'var(--good)';return `<div style="padding:8px 0;border-radius:8px;background:${x};color:${w>4?'var(--mute)':'#fff'}">${d}</div>`}).join("")}</div></div></div>`,
+()=>`<div class="grid">${stat("Active days","5 / 7","This week")}${stat("LMS hours","11.5","Up 2h from last week")}${stat("Forum posts","6","3 replies received")}</div><br><div class="card"><h3>Weekly activity</h3><p class="sub">Hours of study logged</p><div class="cols">${[["Mon",2],["Tue",1.5],["Wed",3],["Thu",2.5],["Fri",1],["Sat",4],["Sun",0.5]].map(([n,v])=>`<div>${v}<i style="height:${v*22}%"></i>${n}</div>`).join("")}</div></div>`,
+()=>`<div class="grid g2"><div class="card"><h3>Overall risk</h3><p class="sub">Updated today</p><div class="big" style="color:var(--good)">Low · 18%</div><div class="bar" style="margin:14px 0"><i style="width:18%;background:var(--good)"></i></div><p class="sub">One subject is pulling the score down.</p></div><div class="card"><h3>Risk factors</h3><p class="sub">By subject</p>${[["Engineering Maths","High",1],["Computer Networks","Medium",2],["Operating Systems","Low",3],["Database Systems","Low",3]].map(x=>`<div class="row"><span class="n">${x[0]}</span><span class="tag ${['','r','w','g'][x[2]]}">${x[1]}</span></div>`).join("")}</div></div><div class="card"><h3>Recommended actions</h3><p class="sub">Do these first</p><div class="row">Attend the Maths doubt session on Thursday.</div><div class="row">Solve 10 past-paper questions on Laplace transforms.</div><div class="row">Raise Networks attendance above 75% before November.</div></div>`,
+()=>`<div class="grid g2"><div class="card" style="text-align:center"><h3>Success score</h3><p class="sub">Combined view of your progress</p>${ring(78,"Success score 78 out of 100")}<p><span class="tag g">Strong</span></p></div><div class="card"><h3>What makes up your score</h3><p class="sub">Weight in brackets</p>${[["Academics (40%)",82],["Attendance (20%)",86],["Engagement (15%)",74],["Skills (15%)",66],["Placement readiness (10%)",70]].map(([n,v])=>`<div class="row"><span class="n">${n}</span><div class="bar" style="flex:1"><i style="width:${v}%"></i></div><b>${v}</b></div>`).join("")}</div></div>`,
+()=>`<div class="grid g2"><div class="card"><h3>My courses</h3><p class="sub">Progress this semester</p>${[["Advanced SQL",75],["Operating Systems",58],["Data Structures in C",90],["Aptitude basics",35]].map(([n,v])=>`<div class="row"><span class="n">${n}</span><div class="bar" style="flex:1"><i style="width:${v}%"></i></div><b>${v}%</b></div>`).join("")}<button class="btn" onclick="toast('Resuming Advanced SQL')">Continue learning</button></div><div class="card"><h3>Assignments</h3><p class="sub">Due soon</p>${[["DBMS assignment 3","Tomorrow","w"],["OS lab report","Mon 12 Oct","g"],["Maths problem set 6","Wed 14 Oct","g"],["Networks mini project","Submitted","g"]].map(x=>`<div class="row"><span class="n">${x[0]}</span><span class="tag ${x[2]}">${x[1]}</span></div>`).join("")}</div></div>`,
+()=>`<div class="card"><h3>My skills</h3><p class="sub">Self-rated and verified by course tests</p>${bars(skills)}<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><input id="sn" placeholder="Skill name" style="flex:2;margin:0;min-width:140px"><input id="sv" type="number" min="0" max="100" placeholder="Level %" style="flex:1;margin:0;min-width:90px"><button class="btn" onclick="addSkill()">Add skill</button></div></div><div class="card"><h3>Skills to build next</h3><p class="sub">Based on open placement drives</p><span class="tag w">System design</span> <span class="tag w">Docker</span> <span class="tag w">Aptitude</span></div>`,
+()=>`<div class="card"><h3>Placement readiness: 70%</h3><div class="bar"><i style="width:70%;background:var(--amber)"></i></div></div><div class="grid">${drives.map((d,i)=>`<div class="card"><h3>${d[0]}</h3><p class="sub">${d[1]} · ${d[2]}</p><p>Match <b>${d[3]}%</b></p><div class="bar" style="margin-bottom:10px"><i style="width:${d[3]}%;background:${col(d[3])}"></i></div><p class="sub">${d[4]}</p><button class="btn ${d[5]?'o':''}" ${d[5]?'disabled':''} onclick="drives[${i}][5]=true;toast('Applied to ${d[0]}');go(view)">${d[5]?'Applied':'Apply now'}</button></div>`).join("")}</div>`,
+()=>`<div class="grid g2"><div class="card"><h3>Plan my week</h3><p class="sub">Tell me your time and focus</p><label>Study hours per day</label><input id="hr" type="number" min="1" max="10" value="3"><label>Weakest subject</label><select id="wk">${subj.map(s=>`<option>${s[0]}</option>`).join("")}</select><label>Exam or deadline</label><input id="dl" value="Maths quiz on Thursday"><button class="btn" onclick="mkPlan()">Create plan</button></div><div class="card"><h3>Your plan</h3>${plan?plan:'<p class="sub">Fill in the form and choose Create plan.</p>'}</div></div>`,
+()=>`<div class="card"><h3>AI assistant</h3><p class="sub">Ask about your marks, attendance or study tips</p><div class="chat" id="chat">${chat.map(m=>`<div class="m ${m[0]=='u'?'u':''}">${m[1]}</div>`).join("")}</div><div class="chips">${["How is my attendance?","Which subject is weakest?","Study tips for Maths","Am I placement ready?"].map(q=>`<button onclick="ask('${q}')">${q}</button>`).join("")}</div><div style="display:flex;gap:8px"><input id="q" placeholder="Type a question" style="margin:0" onkeydown="if(event.key=='Enter')ask()"><button class="btn" onclick="ask()">Send</button></div></div>`,
+()=>`<div class="card"><h3>Goals</h3><p class="sub">${goals.filter(g=>g.d).length} of ${goals.length} completed</p>${goals.map((g,i)=>`<div class="row"><input type="checkbox" style="width:20px;margin:0" ${g.d?'checked':''} onchange="goals[${i}].d=this.checked;if(this.checked)goals[${i}].p=100;go(view)" aria-label="Done"><span class="n" style="${g.d?'text-decoration:line-through;color:var(--mute)':''}">${g.t}</span><div class="bar" style="width:90px"><i style="width:${g.p}%"></i></div><button class="btn o" onclick="goals.splice(${i},1);go(view)" aria-label="Delete goal">✕</button></div>`).join("")}<div style="display:flex;gap:8px;margin-top:14px"><input id="gt" placeholder="New goal" style="margin:0"><button class="btn" onclick="addGoal()">Add goal</button></div></div>`,
+()=>`<div class="grid g2"><div class="card"><h3>Send feedback</h3><p class="sub">Share it with faculty or the college</p><label>About</label><select id="fc"><option>General</option>${subj.map(s=>`<option>${s[0]}</option>`).join("")}<option>Pathwise app</option></select><label>Your feedback</label><textarea id="ft" rows="5"></textarea><button class="btn" onclick="addFb()">Send feedback</button></div><div class="card"><h3>Your feedback</h3><p class="sub">${fb.length} sent</p>${fb.map(f=>`<div class="row"><span class="n"><b>${f.c}</b><br>${f.t}</span><span class="tag g">${f.s}</span></div>`).join("")}</div></div>`,
+()=>{const due=fees.filter(f=>!f[3]).reduce((a,f)=>a+f[1],0);return `<div class="card"><div class="lab">Total due</div><div class="big">₹${due.toLocaleString("en-IN")}</div>${due?'<button class="btn" style="margin-top:12px" onclick="payAll()">Pay now</button>':'<p><span class="tag g">All fees paid</span></p>'}</div><div class="card sc"><h3>Fee details</h3><table><tr><th>Item</th><th>Amount</th><th>Status</th></tr>${fees.map(f=>`<tr><td>${f[0]}</td><td>₹${f[1].toLocaleString("en-IN")}</td><td><span class="tag ${f[3]?'g':'w'}">${f[2]}</span></td></tr>`).join("")}</table></div>`},
+()=>`<div class="grid g2"><div class="card"><h3>Profile</h3><p class="sub">Used on your reports and placement applications</p><label>Full name</label><input value="Aarav Sharma"><label>Roll number</label><input value="21CS1047"><label>Programme</label><input value="B.Tech Computer Science, Year 3"><label>Email</label><input value="aarav@college.edu"><button class="btn" onclick="toast('Profile saved')">Save changes</button></div><div class="card"><h3>Settings</h3><p class="sub">Choose what Pathwise sends you</p>${["Attendance alerts","Assignment reminders","Placement drive alerts","Weekly progress email"].map(n=>`<div class="row"><span class="n">${n}</span><label class="sw"><input type="checkbox" checked aria-label="${n}"><span></span></label></div>`).join("")}</div></div>`
+];
+function go(i){view=i;const L=role=='f'?FS:S,W=role=='f'?FV:V;$("#title").textContent=L[i][0];$("#main").innerHTML=W[i]();document.querySelectorAll("#nav button").forEach((b,j)=>b.classList.toggle("on",j==i-0));if(role=='s'&&i==11){const c=$("#chat");c.scrollTop=c.scrollHeight}side(false)}
+function side(o){$("#side").classList.toggle("open",o);$("#scrim").classList.toggle("open",o)}
+$("#nav").innerHTML=S.map((s,i)=>`<button onclick="go(${i});scrollTo(0,0)"><svg viewBox="0 0 24 24">${I[s[1]]}</svg>${s[0]}</button>`).join("");
+$("#burger").onclick=()=>side(true);$("#close").onclick=()=>side(false);$("#scrim").onclick=()=>side(false);
+$("#theme").onclick=()=>{const r=document.documentElement,d=r.dataset.theme=="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme:dark)").matches);r.dataset.theme=d?"light":"dark"};
+function addSkill(){const n=$("#sn").value.trim(),v=Math.min(100,Math.max(0,+$("#sv").value||0));if(!n)return toast("Enter a skill name");skills.push([n,v]);go(view)}
+function addGoal(){const t=$("#gt").value.trim();if(!t)return toast("Enter a goal");goals.push({t,p:0,d:false});go(view)}
+function addFb(){const t=$("#ft").value.trim();if(!t)return toast("Write your feedback first");fb.unshift({c:$("#fc").value,t,s:"Sent"});toast("Feedback sent");go(view)}
+function payAll(){fees.forEach(f=>{if(!f[3]){f[3]=true;f[2]="Paid today"}});toast("Payment successful");go(view)}
+function mkPlan(){const h=+$("#hr").value||3,w=$("#wk").value,d=$("#dl").value||"your next deadline";const days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];plan=`<p class="sub">${h}h a day · focus on ${w} · ${d}</p>`+days.map((x,i)=>{const t=i==6?"Revision and rest":i%2?`${w} practice problems`:i==2?"Assignments and LMS course":"Class notes and revision";return `<div class="row"><b style="min-width:44px;text-align:left">${x}</b><span class="n">${t}</span><span class="tag">${i==6?1:h}h</span></div>`}).join("");go(view)}
+function ask(q){const i=$("#q"),t=q||i.value.trim();if(!t)return;const l=t.toLowerCase();let r="I can help with attendance, marks, risk, placements, and study tips. Try one of the suggestions.";
+if(l.includes("attend"))r="Your overall attendance is 86%. Engineering Maths (67%) and Computer Networks (74%) are below the 75% minimum, so attend those first.";
+else if(l.includes("weak")||l.includes("marks"))r="Engineering Maths is your weakest subject at 58%, followed by Computer Networks at 64%.";
+else if(l.includes("math")||l.includes("tip")||l.includes("study"))r="For Maths, solve 10 past-paper questions a day, review mistakes the same evening, and join Thursday's doubt session.";
+else if(l.includes("place"))r="Your placement readiness is 70%. Build system design and aptitude skills, then apply to Infosys before 14 Oct.";
+else if(l.includes("risk"))r="Your risk level is low (18%). Maths is the one subject to watch.";
+chat.push(["u",t],["b",r]);go(view)}
+let up=false;
+function mode(u){up=u;$("#nw").style.display=u?"block":"none";$("#lt").textContent=u?"Create account":"Sign in";$("#ls").textContent=u?"Set up your Pathwise profile.":"Welcome back. Enter your college email to continue.";$("#lbtn").textContent=u?"Create account":"Sign in";$("#lq").textContent=u?"Already registered?":"New to Pathwise?";$("#lsw").textContent=u?"Sign in":"Create an account";$("#lerr").textContent=""}
+$("#lsw").onclick=()=>mode(!up);
+$("#lform").onsubmit=e=>{e.preventDefault();const n=$("#ln").value.trim(),m=$("#le").value.trim(),p=$("#lp").value,er=$("#lerr");
+if(up&&!n)return er.textContent="Enter your full name.";
+if(!/^\S+@\S+\.\S+$/.test(m))return er.textContent="Enter a valid email address.";
+if(p.length<6)return er.textContent="Password must be at least 6 characters.";
+const nm=n||m.split("@")[0].replace(/[._]/g," ").replace(/\b\w/g,c=>c.toUpperCase());
+$("#av").textContent=nm.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase();
+document.body.classList.remove("out");role=lr;sel=null;buildNav();if(role=='f')loadStudents();$("#lp").value="";er.textContent="";go(0);scrollTo(0,0);toast("Welcome, "+nm.split(" ")[0])};
+$("#logout").onclick=()=>{document.body.classList.add("out");mode(false);side(false)};
+/* ---------- Faculty workspace ---------- */
+let role='s',lr='s',sel=null,fq='',fr='all',fsub=0,fday=new Date().toISOString().slice(0,10),notes={};
+const NM=[['Aarav Sharma','21CS1047'],['Diya Patel','21CS1012'],['Rohan Mehta','21CS1033'],['Ananya Iyer','21CS1005'],['Kabir Singh','21CS1058'],['Meera Nair','21CS1029'],['Arjun Reddy','21CS1061'],['Sneha Kulkarni','21CS1040'],['Vihaan Gupta','21CS1072'],['Isha Verma','21CS1018'],['Karan Joshi','21CS1050'],['Priya Das','21CS1024']];
+const MK=[subj.map(x=>x[1]),[91,88,85,79,83,90],[62,55,60,48,52,66],[78,80,74,70,68,76],[55,49,58,42,50,61],[84,76,82,72,75,80],[70,64,68,60,62,72],[93,90,92,85,88,94],[66,58,63,52,57,64],[88,84,86,76,80,85],[74,69,72,63,66,75],[80,77,79,68,71,78]];
+const AT=[att.map(x=>x[1]),[96,94,92,88,90,95],[70,62,68,55,60,72],[88,86,84,80,78,86],[64,58,66,50,56,68],[90,84,88,78,82,87],[80,72,76,68,70,82],[97,95,96,90,92,97],[72,66,70,58,64,70],[94,90,92,84,88,93],[82,76,80,70,74,82],[88,82,86,76,80,86]];
+const R=NM.map((n,i)=>({n:n[0],r:n[1],m:MK[i].slice(),a:AT[i].slice()}));
+let pres=R.map(()=>true);
+const av=a=>a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):0;
+const sc=s=>Math.round(.6*av(s.m)+.4*av(s.a));
+const rk=s=>{const v=sc(s);return v<65?['High','r']:v<75?['Medium','w']:['Low','g']};
+const cg=s=>(av(s.m)/10+0.9).toFixed(1);
+const lowAtt=s=>s.a.filter(x=>x<75).length;
+const subOpt=n=>`<select onchange='fsub=+this.value;go(${n})' aria-label='Subject'>${subj.map((x,i)=>`<option value='${i}' ${fsub==i?'selected':''}>${x[0]}</option>`).join('')}</select>`;
+const FS=[['Dashboard','d'],['Students','u'],['Mark attendance','c'],['Enter marks','a'],['At-risk students','w'],['Student feedback','f'],['Profile & settings','u']];
+const stRows=()=>R.map((s,i)=>[s,i]).filter(([s])=>(s.n+s.r).toLowerCase().includes(fq.toLowerCase())&&(fr=='all'||rk(s)[0]==fr)).map(([s,i])=>`<tr><td>${s.n}</td><td>${s.r}</td><td>${cg(s)}</td><td>${av(s.a)}%</td><td><span class='tag ${rk(s)[1]}'>${rk(s)[0]}</span></td><td class='act'><button class='btn o' onclick='sel=${i};go(1)'>View</button><button class='btn o' onclick='openForm(${i})'>Edit</button><button class='btn d' onclick='delStu(${i})'>Delete</button></td></tr>`).join('')||`<tr><td colspan='6'>No students match your search.</td></tr>`;
+const stList=()=>{$('#stb').innerHTML=stRows()};
+const detail=s=>{const i=R.indexOf(s),r=rk(s);return `<button class='btn o' onclick='sel=null;go(1)'>Back to students</button> <button class='btn o' onclick='openForm(${i})'>Edit</button> <button class='btn d' onclick='delStu(${i})'>Delete</button><br><br><div class='grid'>${stat('Student',s.n,s.r+' · '+(s.d||'B.Tech CSE')+(s.sem?' · Sem '+s.sem:'')+(s.e?'<br>'+s.e:''))}${stat('CGPA',cg(s),'Estimated from internal marks')}${stat('Attendance',av(s.a)+'%',lowAtt(s)+' subject(s) below 75%')}${stat('Risk level',r[0],'Success score '+sc(s))}</div><br><div class='grid g2'><div class='card'><h3>Internal marks</h3><p class='sub'>By subject</p>${bars(subj.map((x,j)=>[x[0],s.m[j]]))}</div><div class='card'><h3>Attendance</h3><p class='sub'>Minimum required is 75%</p>${bars(subj.map((x,j)=>[x[0],s.a[j]]))}</div></div><div class='card'><h3>Faculty note</h3><p class='sub'>Only faculty can see this</p><textarea id='nt' rows='3' placeholder='Add a note about ${s.n}'>${notes[i]||''}</textarea><button class='btn' onclick='notes[${i}]=$("#nt").value;toast("Note saved")'>Save note</button> <button class='btn o' onclick='toast("Alert sent to ${s.n}")'>Send alert</button> <button class='btn o' onclick='toast("Meeting request sent to ${s.n}")'>Request meeting</button></div>`};
+const FV=[
+()=>{const n=R.filter(s=>rk(s)[1]!='g').length;return `<div class='grid'>${stat('Students',R.length,'B.Tech CSE, Year 3, Section A')}${stat('Average attendance',av(R.map(s=>av(s.a)))+'%','Across all subjects')}${stat('Average marks',av(R.map(s=>av(s.m)))+'%','Internal assessments')}${stat('Need attention',n,'Medium or high risk')}</div><br><div class='grid g2'><div class='card'><h3>Class average by subject</h3><p class='sub'>Internal marks</p>${bars(subj.map((x,i)=>[x[0],av(R.map(s=>s.m[i]))]))}</div><div class='card'><h3>Lowest success scores</h3><p class='sub'>Students to check on first</p>${R.slice().sort((a,b)=>sc(a)-sc(b)).slice(0,5).map(s=>`<div class='row'><span class='n'>${s.n}<br><span class='sub' style='margin:0'>${s.r} · score ${sc(s)}</span></span><span class='tag ${rk(s)[1]}'>${rk(s)[0]}</span><button class='btn o' onclick='sel=${R.indexOf(s)};go(1)'>View</button></div>`).join('')}</div></div>`},
+()=>sel!=null?detail(R[sel]):`<div class='card'><div style='display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap'><div style='flex:1'><h3>Students</h3><p class='sub'>${R.length} students. Use View, Edit or Delete on each row.</p></div><button class='btn' onclick='openForm(null)'>Add student</button></div><div style='display:flex;gap:8px;flex-wrap:wrap'><input placeholder='Search name or roll number' value='${fq}' oninput='fq=this.value;stList()' style='flex:2;min-width:180px' aria-label='Search students'><select onchange='fr=this.value;stList()' style='flex:1;min-width:140px' aria-label='Risk filter'>${['all','High','Medium','Low'].map(x=>`<option value='${x}' ${fr==x?'selected':''}>${x=='all'?'All risk levels':x+' risk'}</option>`).join('')}</select></div><div class='sc'><table><tr><th>Name</th><th>Roll no.</th><th>CGPA</th><th>Attendance</th><th>Risk</th><th>Actions</th></tr><tbody id='stb'>${stRows()}</tbody></table></div></div>`,
+()=>`<div class='card'><h3>Mark attendance</h3><p class='sub'>Choose a subject and date, then switch off students who are absent</p><div style='display:flex;gap:8px;flex-wrap:wrap'><div style='flex:2;min-width:180px'>${subOpt(2)}</div><input type='date' value='${fday}' onchange='fday=this.value' style='flex:1;min-width:150px' aria-label='Date'></div><div class='sc'><table><tr><th>Student</th><th>Roll no.</th><th>Attendance</th><th>Present</th></tr>${R.map((s,i)=>`<tr><td>${s.n}</td><td>${s.r}</td><td>${s.a[fsub]}%</td><td><label class='sw'><input type='checkbox' ${pres[i]?'checked':''} onchange='pres[${i}]=this.checked' aria-label='Present: ${s.n}'><span></span></label></td></tr>`).join('')}</table></div><button class='btn' onclick='saveAtt()'>Save attendance</button> <button class='btn o' onclick='pres=pres.map(()=>true);go(2)'>Mark all present</button></div>`,
+()=>`<div class='card'><h3>Enter marks</h3><p class='sub'>Internal assessment marks out of 100</p>${subOpt(3)}<div class='sc'><table><tr><th>Student</th><th>Roll no.</th><th>Current</th><th>New marks</th></tr>${R.map((s,i)=>`<tr><td>${s.n}</td><td>${s.r}</td><td>${s.m[fsub]}</td><td><input type='number' min='0' max='100' class='mk' data-i='${i}' value='${s.m[fsub]}' style='margin:0;width:90px' aria-label='Marks for ${s.n}'></td></tr>`).join('')}</table></div><button class='btn' onclick='saveMk()'>Save marks</button></div>`,
+()=>{const l=R.filter(s=>rk(s)[1]!='g').sort((a,b)=>sc(a)-sc(b));return `<div class='card'><h3>At-risk students</h3><p class='sub'>${l.length} students at medium or high risk</p>${l.map(s=>{const w=subj.filter((x,j)=>s.m[j]<60||s.a[j]<75).map(x=>x[0]);return `<div class='row' style='flex-wrap:wrap'><span class='n'><b>${s.n}</b> · ${s.r}<br><span class='sub' style='margin:0'>Needs help in: ${w.join(', ')||'no single subject'}</span></span><span class='tag ${rk(s)[1]}'>${rk(s)[0]}</span><button class='btn o' onclick='sel=${R.indexOf(s)};go(1)'>View</button><button class='btn' onclick='toast("Alert sent to ${s.n}")'>Send alert</button></div>`}).join('')||`<p class='sub'>No students are at risk.</p>`}</div>`},
+()=>`<div class='card'><h3>Student feedback</h3><p class='sub'>Shared with you by students</p>${[['Diya Patel','Database Systems','Lab sessions are very useful. Please share the solutions after class.'],['Kabir Singh','Engineering Maths','The pace is too fast in the last two units.']].concat(fb.map(f=>['Aarav Sharma',f.c,f.t])).map(f=>`<div class='row' style='flex-wrap:wrap'><span class='n'><b>${f[0]}</b> · ${f[1]}<br>${f[2]}</span><button class='btn o' onclick='toast("Student notified")'>Acknowledge</button></div>`).join('')}</div>`,
+()=>`<div class='grid g2'><div class='card'><h3>Profile</h3><p class='sub'>Shown to students and the department</p><label>Full name</label><input value='Dr. Neha Kapoor'><label>Employee ID</label><input value='FAC-0312'><label>Department</label><input value='Computer Science and Engineering'><label>Email</label><input value='neha.kapoor@college.edu'><button class='btn' onclick='toast("Profile saved")'>Save changes</button></div><div class='card'><h3>Settings</h3><p class='sub'>Choose what Pathwise sends you</p>${['High-risk student alerts','Low attendance alerts','New student feedback','Weekly class summary'].map(n=>`<div class='row'><span class='n'>${n}</span><label class='sw'><input type='checkbox' checked aria-label='${n}'><span></span></label></div>`).join('')}</div></div>`
+];
+function saveAtt(){R.forEach((s,i)=>{s.a[fsub]=Math.max(0,Math.min(100,s.a[fsub]+(pres[i]?1:-2)))});pres=R.map(()=>true);toast('Attendance saved for '+fday);go(2)}
+function saveMk(){document.querySelectorAll('.mk').forEach(e=>{R[+e.dataset.i].m[fsub]=Math.min(100,Math.max(0,+e.value||0))});toast('Marks saved');go(3)}
+function buildNav(){const L=role=='f'?FS:S;$('#nav').innerHTML=`<p class='sub' style='color:#8d9ab8;padding:0 12px'>${role=='f'?'Faculty workspace':'Student workspace'}</p>`+L.map((s,i)=>`<button onclick='go(${i});scrollTo(0,0)'><svg viewBox='0 0 24 24'>${I[s[1]]}</svg>${s[0]}</button>`).join('')}
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{lr=b.dataset.r;document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x==b))});
+/* ===== Messages (green = success, red = error) ===== */
+function notify(m,err){document.querySelectorAll('.toast').forEach(x=>x.remove());const t=document.createElement('div');t.className='toast';t.setAttribute('role',err?'alert':'status');t.style.background=err?'var(--bad)':'var(--good)';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),err?6000:2800)}
+
+/* ===== Load students from Supabase (also used to refresh after every change) ===== */
+async function loadStudents(quiet){
+  if(!db){if(!quiet)toast('Supabase not set up, showing sample data');return}
+  const {data,error}=await db.from('students').select('*').order('student_id');
+  if(error){console.error(error);notify('Could not load students: '+error.message,true);return}
+  const keep=sel!=null&&R[sel]?R[sel].id:null;
+  R.length=0;
+  data.forEach(x=>{
+    const c=Number(x.cgpa)||0,a=Math.max(0,Math.min(100,Math.round(Number(x.attendance)||0))),m=Math.max(0,Math.min(100,Math.round((c-0.9)*10)));
+    R.push({id:x.id,n:x.name||'Unnamed',r:x.student_id||'',e:x.email,d:x.department,sem:x.semester,m:Array(6).fill(m),a:Array(6).fill(a)});
+  });
+  pres=R.map(()=>true);
+  sel=keep!=null?R.findIndex(x=>x.id===keep):null;if(sel<0)sel=null;
+  if(!quiet)notify(data.length?'Loaded '+data.length+' students from Supabase':'No students yet. Use Add student to create one.');
+  if(role=='f'&&!document.body.classList.contains('out'))go(view);
+}
+
+/* ===== Add / Edit form ===== */
+let editIdx=null;
+const errText=e=>[e.message,e.code&&'(code '+e.code+')',e.details&&'Details: '+e.details,e.hint&&'Hint: '+e.hint,(e.code==='42501'||/row-level security/i.test(e.message||''))&&'Fix: add the insert/update/delete policy in the Supabase SQL Editor.'].filter(Boolean).join(' ');
+const val=id=>document.getElementById(id).value.trim();
+function openForm(i){
+  editIdx=i;const s=i==null?null:R[i];
+  $('#ft2').textContent=s?'Edit student':'Add student';
+  $('#f_id').value=s?s.r:'';$('#f_name').value=s?s.n:'';$('#f_email').value=s&&s.e?s.e:'';
+  $('#f_dep').value=s&&s.d?s.d:'';$('#f_sem').value=s&&s.sem!=null?s.sem:'';
+  $('#f_att').value=s?s.a[0]:'';$('#f_cgpa').value=s?cg(s):'';
+  $('#ferr').textContent='';$('#fsave').disabled=false;
+  $('#sm').classList.add('open');$('#f_id').focus();
+}
+function closeForm(){$('#sm').classList.remove('open')}
+async function saveStu(e){
+  e.preventDefault();
+  const er=$('#ferr'),row={student_id:val('f_id'),name:val('f_name'),email:val('f_email')||null,department:val('f_dep')||null,semester:val('f_sem')===''?null:Number(val('f_sem')),attendance:val('f_att')===''?NaN:Number(val('f_att')),cgpa:val('f_cgpa')===''?NaN:Number(val('f_cgpa'))};
+  if(!row.student_id)return er.textContent='Enter the Student ID.';
+  if(!row.name)return er.textContent='Enter the student name.';
+  if(row.email&&!/^\S+@\S+\.\S+$/.test(row.email))return er.textContent='Enter a valid email address.';
+  if(row.semester!==null&&(!Number.isInteger(row.semester)||row.semester<1||row.semester>12))return er.textContent='Semester must be a whole number from 1 to 12.';
+  if(isNaN(row.attendance)||row.attendance<0||row.attendance>100)return er.textContent='Attendance must be a number from 0 to 100.';
+  if(isNaN(row.cgpa)||row.cgpa<0||row.cgpa>10)return er.textContent='CGPA must be a number from 0 to 10.';
+  if(R.some((x,i)=>x.r===row.student_id&&i!==editIdx))return er.textContent='A student with this ID already exists.';
+  if(!db)return er.textContent='Supabase is not connected. Add your URL and key at the top of the script.';
+  const cur=editIdx==null?null:R[editIdx];
+  if(cur&&!cur.id)return er.textContent='This is sample data, so it cannot be edited. Load real students first.';
+  $('#fsave').disabled=true;er.textContent='Saving...';
+  let res;
+  try{res=cur?await db.from('students').update(row).eq('id',cur.id).select():await db.from('students').insert([row])}
+  catch(x){res={error:{message:x.message}}}
+  $('#fsave').disabled=false;
+  if(res.error){console.error('Supabase error:',res.error);er.textContent='Supabase error: '+errText(res.error);return notify('Could not save the student. Read the message in the form.',true)}
+  if(cur&&(!res.data||!res.data.length)){er.textContent='Supabase did not update any row. Check that your update policy allows it.';return notify('Nothing was updated.',true)}
+  await loadStudents(true);
+  if(!cur&&!R.some(x=>x.r===row.student_id)){er.textContent='Supabase accepted the insert, but the new student is not visible when reading the table. Check your select policy.';return notify('Saved, but the student is not visible.',true)}
+  closeForm();
+  notify(row.name+(cur?' was updated.':' was added.'));
+}
+
+/* ===== Delete with confirmation ===== */
+async function delStu(i){
+  const s=R[i];if(!s)return;
+  if(!confirm('Delete '+s.n+' ('+s.r+')?\n\nThis permanently removes the student from the database and cannot be undone.'))return;
+  if(!db)return notify('Supabase is not connected. Add your URL and key at the top of the script.',true);
+  if(!s.id)return notify('This is sample data, so it cannot be deleted.',true);
+  const {data,error}=await db.from('students').delete().eq('id',s.id).select();
+  if(error){console.error(error);return notify('Could not delete: '+errText(error),true)}
+  if(!data||!data.length)return notify('Nothing was deleted. Check that your Supabase policy allows delete.',true);
+  if(sel===i)sel=null;
+  notify(s.n+' was deleted.');
+  await loadStudents(true);
+}
+$('#sform').onsubmit=saveStu;$('#fcancel').onclick=closeForm;
+$('#sm').addEventListener('click',e=>{if(e.target.id=='sm')closeForm()});
+document.addEventListener('keydown',e=>{if(e.key=='Escape')closeForm()});
+go(0);
+</script></body></html>
